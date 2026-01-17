@@ -1,0 +1,200 @@
+You are Replit AI acting as a senior frontend game developer and game designer.
+
+Your task is to BUILD a PLAYABLE WEB-BASED 2D PSYCHOLOGICAL HORROR GAME using JavaScript, HTML, and Canvas (or equivalent browser-based rendering).
+
+This is NOT a website.
+This is NOT a UI mockup.
+This is a GAME.
+
+====================================================
+CORE GAME IDEA
+====================================================
+
+The game is a psychological horror experience based on OBSERVATION, WAITING, and UNCERTAINTY.
+
+There is:
+- No combat
+- No weapons
+- No jumpscares
+- No chasing enemies
+
+The horror comes from realizing something is watching and reacting to the player’s behavior.
+
+The player is not hunted.
+The player is observed.
+
+====================================================
+GAME VIEW & CAMERA
+====================================================
+
+- 2D top-down perspective
+- Fixed camera
+- The player exists inside a bounded room/map
+- Visibility is LIMITED (fog of war / light radius)
+- Player cannot see the entire map at once
+
+Darkness is gameplay, not decoration.
+
+====================================================
+MAP & ENVIRONMENT
+====================================================
+
+- Create a single enclosed interior map
+- Map must have:
+  - Walls
+  - Floor
+  - Clear boundaries
+- Tile-based or grid-based layout preferred
+- No abstract backgrounds
+- No empty voids
+
+The player must immediately feel:
+"I am inside a space."
+
+====================================================
+PLAYER
+====================================================
+
+- Player is a simple moving entity
+- Keyboard movement (WASD / arrow keys)
+- Slow movement speed
+- No sprinting
+- No jumping
+- No visible body or hands
+
+Player is represented as presence, not character.
+
+====================================================
+VISIBILITY RULES (CRITICAL)
+====================================================
+
+- Player visibility must be limited
+- Use one or more:
+  - Circular light radius
+  - Fog-of-war
+  - Distance-based fade
+- Darkness must obscure rooms and corners
+- Player must NEVER have full map visibility
+
+====================================================
+GHOST ENTITY
+====================================================
+
+- Add a visible ghost entity inside the map
+- The ghost shares the same space as the player
+- The ghost does NOT chase
+- The ghost does NOT attack
+
+Ghost behavior:
+- Appears periodically on a cooldown
+- Appears in corners, nearby rooms, or corridors
+- Sometimes moves slowly
+- Sometimes disappears when approached or stared at
+- Sometimes relocates when player is not looking
+
+The ghost must feel:
+- Intelligent
+- Observant
+- Patient
+
+====================================================
+PUZZLE (MANDATORY)
+====================================================
+
+Implement the following puzzle exactly:
+
+PUZZLE NAME: THE WAITING DOOR
+
+Rules:
+- A locked door blocks progression
+- The door cannot be opened by interaction
+- The door opens ONLY if the player stands still
+
+Puzzle logic:
+- Timer starts ONLY when:
+  - Player is not moving
+  - Player is standing in darkness
+- After 8–12 seconds of stillness:
+  - Door slowly opens
+- If the player moves early:
+  - Timer resets
+
+During waiting:
+- The ghost may appear nearby
+- The ghost does not attack
+- The tension comes from waiting, not danger
+
+No instructions.
+No text hints.
+The player learns by experience.
+
+====================================================
+GAME LOOP
+====================================================
+
+1. Game starts
+2. Player explores limited-visibility room
+3. Ghost appears intermittently
+4. Player encounters the Waiting Door
+5. Player must stand still in darkness
+6. Ghost presence escalates
+7. Door opens
+8. Player proceeds
+9. Game ends
+
+====================================================
+ENDING
+====================================================
+
+The game MUST end.
+
+End with a simple message:
+"It learned when you chose to wait."
+or
+"You were being observed."
+
+Fade to black.
+Restart option only.
+
+No score.
+No win screen.
+No fail screen.
+
+====================================================
+TECHNICAL REQUIREMENTS
+====================================================
+
+- Entirely browser-based
+- No backend
+- No external servers
+- Lightweight assets
+- Runs smoothly in Replit preview
+
+====================================================
+WHAT YOU MUST NOT DO
+====================================================
+
+- Do NOT add combat
+- Do NOT add chasing mechanics
+- Do NOT add jumpscares
+- Do NOT add tutorials or UI text
+- Do NOT show full map visibility
+- Do NOT turn this into a maze runner
+
+====================================================
+FINAL EXPECTATION
+====================================================
+
+When finished:
+- The player can move inside a 2D map
+- Visibility is limited
+- A ghost appears and disappears intelligently
+- A psychological puzzle exists
+- The game reaches a clear ending
+
+If anything is unclear, choose:
+MORE TENSION over MORE FEATURES.
+MORE PSYCHOLOGY over MORE MECHANICS.
+MORE CLARITY over MORE CONTENT.
+
+This is a playable game, not a concept demo.

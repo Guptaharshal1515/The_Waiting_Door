@@ -1,0 +1,207 @@
+You are Replit AI acting as a senior frontend game engineer.
+
+Your task is to IMPLEMENT the game as a clean, modular, browser-based system using HTML, CSS, and JavaScript (Canvas-based rendering preferred).
+
+Focus on STRUCTURE, PIPELINE, and SYSTEM INTERACTIONS.
+
+====================================================
+HIGH-LEVEL TECH PIPELINE
+====================================================
+
+The game must be structured into clear systems:
+
+1. Rendering System (Canvas)
+2. Input System (Keyboard)
+3. World / Map System
+4. Visibility & Lighting System
+5. Player System
+6. Ghost System
+7. Puzzle System
+8. Game State & Progression System
+9. Main Game Loop
+
+Each system must be logically separated in code.
+
+====================================================
+1. RENDERING SYSTEM
+====================================================
+
+- Use HTML Canvas as the main render surface
+- Set a fixed canvas size (e.g. 800x800 or responsive)
+- All visuals (map, player, ghost, darkness) are drawn every frame
+- No DOM-based gameplay elements
+
+Rendering order (IMPORTANT):
+1. Floor / map tiles
+2. Walls
+3. Ghost entity
+4. Player position indicator (if any)
+5. Darkness / fog-of-war overlay
+6. UI overlays (end screen text only)
+
+====================================================
+2. INPUT SYSTEM
+====================================================
+
+- Capture keyboard input (WASD / Arrow keys)
+- Maintain a movement state object:
+  - isMoving (true/false)
+  - lastMoveTime
+- Do NOT directly move the player inside event handlers
+- Input only updates intent; movement happens in the update loop
+
+====================================================
+3. WORLD / MAP SYSTEM
+====================================================
+
+- Represent the map as a 2D array (grid)
+- Each cell represents:
+  - Floor
+  - Wall
+  - Door (locked / unlocked)
+- Walls block movement
+- Doors have internal state (locked, opening, open)
+
+The map system must expose:
+- isWalkable(x, y)
+- isDarkTile(x, y)
+- getTileType(x, y)
+
+====================================================
+4. VISIBILITY & LIGHTING SYSTEM (CRITICAL)
+====================================================
+
+- Implement a circular visibility radius around the player
+- Everything outside the radius is darkened or hidden
+- Use alpha masking or overlay blending
+- Darkness updates every frame based on player position
+
+Rules:
+- Player NEVER sees full map
+- Corners and distant rooms are obscured
+- Darkness is part of gameplay logic (used by puzzles)
+
+====================================================
+5. PLAYER SYSTEM
+====================================================
+
+Player properties:
+- position (x, y)
+- speed (slow)
+- isMoving (derived from input)
+- timeStill (accumulated when not moving)
+
+Player update logic:
+- If input detected → move player (if walkable)
+- If no input → increment timeStill
+- If movement resumes → reset timeStill
+
+Player does NOT attack.
+Player does NOT interact via buttons.
+
+====================================================
+6. GHOST SYSTEM
+====================================================
+
+Ghost is an autonomous system with its own state.
+
+Ghost properties:
+- position (x, y)
+- visible (true/false)
+- timerSinceLastAppearance
+- behaviorState (idle / watching / disappearing)
+
+Ghost logic:
+- Appears on a cooldown timer
+- Spawns in valid tiles away from player
+- Does NOT chase player
+- Does NOT pathfind
+- May slowly drift or remain still
+- May disappear when player gets too close or looks at it too long
+
+Ghost update runs independently of player input.
+
+====================================================
+7. PUZZLE SYSTEM — THE WAITING DOOR
+====================================================
+
+Implement the puzzle as a system, not hardcoded logic.
+
+Puzzle conditions:
+- Door has locked = true
+- Door unlock timer starts ONLY when:
+  - player.isMoving === false
+  - player is standing in a dark tile
+- If player moves → reset timer
+- If timer reaches threshold (e.g. 10 seconds):
+  - Door unlocks
+  - Door visually opens
+
+The puzzle system listens to:
+- Player system
+- Visibility system
+- Map system
+
+====================================================
+8. GAME STATE & PROGRESSION SYSTEM
+====================================================
+
+Define global game states:
+- START
+- PLAYING
+- ESCALATING
+- ENDING
+
+State transitions:
+- START → PLAYING when game loads
+- PLAYING → ESCALATING after first ghost appearance
+- ESCALATING → ENDING after puzzle completion
+
+End state:
+- Freeze movement
+- Fade to black
+- Show ending message
+- Restart option resets all systems
+
+====================================================
+9. MAIN GAME LOOP
+====================================================
+
+Use requestAnimationFrame loop:
+
+Each frame:
+1. Process input
+2. Update player
+3. Update ghost
+4. Update puzzle logic
+5. Update game state
+6. Render everything
+
+No blocking logic.
+No setInterval for core loop.
+
+====================================================
+ERROR PREVENTION & SCOPE CONTROL
+====================================================
+
+- Keep everything client-side
+- Avoid heavy libraries
+- Keep logic readable and modular
+- Prioritize correctness over visuals
+
+====================================================
+FINAL EXPECTATION
+====================================================
+
+By the end:
+- The game runs fully in browser
+- Systems are modular
+- Visibility is limited
+- Ghost behaves psychologically, not aggressively
+- Puzzle is functional
+- Game ends cleanly
+
+If something conflicts:
+- Gameplay > Visual polish
+- System clarity > Feature count
+- Psychological tension > Mechanical difficulty
