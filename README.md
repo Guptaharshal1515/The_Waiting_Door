@@ -1,8 +1,8 @@
 # The Waiting Door 🚪
 
 A psychological horror game where patience is your only weapon. Navigate through dark corridors, collect relics, and face the watching ghost. But remember - sometimes the best action is to wait.
-**The door opened not because you pushed,
-but because you stopped pushing.**
+
+### **The door opened not because you pushed, but because you stopped pushing.**
 
 ![Game Preview](https://img.shields.io/badge/Status-Playable-success)
 ![License](https://img.shields.io/badge/License-MIT-blue)
@@ -139,6 +139,7 @@ Contributions are welcome! Feel free to:
 
 **Harshal Gupta**
 - GitHub: [@Guptaharshal1515](https://github.com/Guptaharshal1515)
+
 **Amarendra Pratap Singh**
 - Github: [@orbaps](https://github.com/orbaps)
 ## 🙏 Acknowledgments
