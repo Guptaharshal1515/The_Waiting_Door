@@ -1,11 +1,13 @@
 # The Waiting Door 🚪
 
 A psychological horror game where patience is your only weapon. Navigate through dark corridors, collect relics, and face the watching ghost. But remember - sometimes the best action is to wait.
+**The door opened not because you pushed,
+but because you stopped pushing.**
 
 ![Game Preview](https://img.shields.io/badge/Status-Playable-success)
 ![License](https://img.shields.io/badge/License-MIT-blue)
 
-## 🎮 About The Game
+##  About The Game
 
 **The Waiting Door** is a 2D psychological horror game built with React and TypeScript. Unlike traditional horror games that rely on jump scares, this game creates tension through atmosphere, limited visibility, and the constant feeling of being watched.
 
@@ -16,7 +18,7 @@ A psychological horror game where patience is your only weapon. Navigate through
 - **Multiple Levels**: 6 progressively challenging levels with unique layouts
 - **Fog of War**: Experience true darkness with radial gradient visibility
 
-## 🎯 Features
+##  Features
 
 - ✨ **6 Unique Levels** - Each with increasing difficulty and complexity
 - 👻 **Smart Ghost AI** - Predicts player movement and adapts to your playstyle
@@ -26,7 +28,7 @@ A psychological horror game where patience is your only weapon. Navigate through
 - 🎨 **Retro Aesthetic** - CRT scanline effects and vignette overlay
 - 🔄 **Respawn System** - Ghost catches you? Start again, but keep your relics!
 
-## 🚀 Getting Started
+##  Getting Started
 
 ### Prerequisites
 - Node.js (v16 or higher)
@@ -132,15 +134,13 @@ Contributions are welcome! Feel free to:
 - Submit pull requests
 - Improve documentation
 
-## 📝 License
-
-This project is licensed under the MIT License - see the LICENSE file for details.
 
 ## 👨‍💻 Author
 
 **Harshal Gupta**
 - GitHub: [@Guptaharshal1515](https://github.com/Guptaharshal1515)
-
+**Amarendra Pratap Singh**
+- Github: [@orbaps](https://github.com/orbaps)
 ## 🙏 Acknowledgments
 
 - Inspired by classic psychological horror games
