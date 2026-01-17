@@ -24,43 +24,84 @@ interface GameCanvasProps {
   onTensionChange: (tension: number) => void;
 }
 
-// Simple level map (1 = wall, 0 = floor, 2 = door, 9 = start)
-// 20x15 grid (800x600 px)
-const LEVEL_MAP = [
-  [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
-  [1,9,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,1],
-  [1,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,1],
-  [1,0,0,0,0,0,1,0,0,1,1,1,1,0,0,0,0,0,0,1],
-  [1,0,0,1,0,0,1,0,0,1,0,0,0,0,0,1,0,0,0,1],
-  [1,0,0,1,0,0,0,0,0,1,0,0,0,0,0,1,0,0,0,1],
-  [1,0,0,1,1,1,1,0,0,0,0,0,1,1,1,1,0,0,0,1],
-  [1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
-  [1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
-  [1,0,0,1,1,1,1,1,1,0,0,1,1,1,1,1,1,0,0,1],
-  [1,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,1],
-  [1,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,1],
-  [1,0,0,1,0,0,1,1,1,2,2,1,1,1,0,0,1,0,0,1], // Door at (9,12) and (10,12)
-  [1,0,0,0,0,0,1,0,0,0,0,0,0,1,0,0,0,0,0,1],
-  [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+// Simple level map (1 = wall, 0 = floor, 2 = door, 3 = key, 9 = start)
+const LEVEL_MAPS = [
+  [
+    [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+    [1,9,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,1],
+    [1,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,1],
+    [1,0,0,0,0,0,1,0,0,1,1,1,1,0,0,0,0,0,0,1],
+    [1,0,0,1,0,0,1,0,0,1,3,0,0,0,0,0,1,0,0,1],
+    [1,0,0,1,0,0,0,0,0,1,0,0,0,0,0,1,0,0,1,1],
+    [1,0,0,1,1,1,1,0,0,0,0,0,1,1,1,1,0,0,0,1],
+    [1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
+    [1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
+    [1,0,0,1,1,1,1,1,1,0,0,1,1,1,1,1,1,0,0,1],
+    [1,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,1],
+    [1,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,1],
+    [1,0,0,1,0,0,1,1,1,2,2,1,1,1,0,0,1,0,0,1],
+    [1,0,0,0,0,0,1,0,0,0,0,0,0,1,0,0,0,0,0,1],
+    [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+  ],
+  [
+    [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+    [1,9,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
+    [1,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,1],
+    [1,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,1],
+    [1,0,1,0,1,1,1,1,1,1,1,1,1,1,1,1,0,1,0,1],
+    [1,0,1,0,1,0,0,0,0,0,0,0,0,0,0,1,0,1,0,1],
+    [1,0,1,0,1,0,1,1,1,2,2,1,1,1,0,1,0,1,0,1],
+    [1,0,1,0,1,0,1,3,0,0,0,0,0,1,0,1,0,1,0,1],
+    [1,0,1,0,1,0,1,1,1,1,1,1,1,1,0,1,0,1,0,1],
+    [1,0,1,0,1,0,0,0,0,0,0,0,0,0,0,1,0,1,0,1],
+    [1,0,1,0,1,1,1,1,1,1,1,1,1,1,1,1,0,1,0,1],
+    [1,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,1],
+    [1,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,1],
+    [1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
+    [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+  ]
 ];
 
 export function GameCanvas({ onGameComplete, onTensionChange }: GameCanvasProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const requestRef = useRef<number>();
   
+  const [level, setLevel] = useState(0);
+  
   // Game state stored in Ref to avoid re-renders during loop
-  const stateRef = useRef<GameState>({
+  const stateRef = useRef<GameState & { currentLevel: number; hasKey: boolean; ghostVelocity: Point }>({
     player: { x: 80, y: 80, isMoving: false },
     ghost: { x: 0, y: 0, opacity: 0, targetOpacity: 0, visible: false },
     lastMoveTime: Date.now(),
     doorOpenProgress: 0,
     isDoorOpen: false,
     gameCompleted: false,
-    startTime: Date.now()
+    startTime: Date.now(),
+    currentLevel: 0,
+    hasKey: false,
+    ghostVelocity: { x: 0, y: 0 }
   });
 
   // Input state
   const keysRef = useRef<Record<string, boolean>>({});
+
+  const initLevel = (lvlIndex: number) => {
+    const map = LEVEL_MAPS[lvlIndex];
+    for(let y=0; y<map.length; y++) {
+      for(let x=0; x<map[y].length; x++) {
+        if (map[y][x] === 9) {
+          stateRef.current.player.x = x * TILE_SIZE + TILE_SIZE/2;
+          stateRef.current.player.y = y * TILE_SIZE + TILE_SIZE/2;
+        }
+      }
+    }
+    stateRef.current.isDoorOpen = false;
+    stateRef.current.doorOpenProgress = 0;
+    stateRef.current.hasKey = false;
+    stateRef.current.lastMoveTime = Date.now();
+    stateRef.current.ghost.visible = false;
+    stateRef.current.ghost.opacity = 0;
+  };
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -68,15 +109,7 @@ export function GameCanvas({ onGameComplete, onTensionChange }: GameCanvasProps)
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
 
-    // Initialize player pos from map
-    for(let y=0; y<LEVEL_MAP.length; y++) {
-      for(let x=0; x<LEVEL_MAP[y].length; x++) {
-        if (LEVEL_MAP[y][x] === 9) {
-          stateRef.current.player.x = x * TILE_SIZE + TILE_SIZE/2;
-          stateRef.current.player.y = y * TILE_SIZE + TILE_SIZE/2;
-        }
-      }
-    }
+    initLevel(0);
     stateRef.current.startTime = Date.now();
 
     const handleKeyDown = (e: KeyboardEvent) => { keysRef.current[e.code] = true; };
@@ -107,6 +140,7 @@ export function GameCanvas({ onGameComplete, onTensionChange }: GameCanvasProps)
       }
 
       // Collision Detection (Circle vs AABB Tiles)
+      const currentMap = LEVEL_MAPS[state.currentLevel];
       const nextX = state.player.x + dx;
       const nextY = state.player.y + dy;
       
@@ -116,12 +150,12 @@ export function GameCanvas({ onGameComplete, onTensionChange }: GameCanvasProps)
       // Check X collision
       const tileX = Math.floor(nextX / TILE_SIZE);
       const tileY_curr = Math.floor(state.player.y / TILE_SIZE);
-      if (LEVEL_MAP[tileY_curr]?.[tileX] === 1) collidedX = true;
+      if (currentMap[tileY_curr]?.[tileX] === 1) collidedX = true;
       
       // Check Y collision
       const tileX_curr = Math.floor(state.player.x / TILE_SIZE);
       const tileY = Math.floor(nextY / TILE_SIZE);
-      if (LEVEL_MAP[tileY]?.[tileX_curr] === 1) collidedY = true;
+      if (currentMap[tileY]?.[tileX_curr] === 1) collidedY = true;
 
       // Update position if no collision
       if (!collidedX) state.player.x += dx;
@@ -129,8 +163,16 @@ export function GameCanvas({ onGameComplete, onTensionChange }: GameCanvasProps)
 
       state.player.isMoving = (dx !== 0 || dy !== 0);
 
+      // Key collection
+      const px = Math.floor(state.player.x / TILE_SIZE);
+      const py = Math.floor(state.player.y / TILE_SIZE);
+      if (currentMap[py]?.[px] === 3) {
+        currentMap[py][px] = 0; // Remove key
+        state.hasKey = true;
+      }
+
       // 2. Waiting Logic (The Puzzle)
-      if (state.player.isMoving) {
+      if (state.player.isMoving || !state.hasKey) {
         state.lastMoveTime = now;
         state.doorOpenProgress = 0;
         // Notify parent tension reset
@@ -146,42 +188,59 @@ export function GameCanvas({ onGameComplete, onTensionChange }: GameCanvasProps)
         }
       }
 
-      // 3. Ghost Logic (Atmosphere)
+      // 3. Ghost Logic (AI Chasing & Prediction)
       if (!state.ghost.visible) {
         if (Math.random() < GHOST_SPAWN_CHANCE) {
-          // Spawn ghost
           const angle = Math.random() * Math.PI * 2;
-          const dist = GHOST_MIN_DIST + Math.random() * (GHOST_MAX_DIST - GHOST_MIN_DIST);
+          const dist = GHOST_MAX_DIST;
           state.ghost.x = state.player.x + Math.cos(angle) * dist;
           state.ghost.y = state.player.y + Math.sin(angle) * dist;
           state.ghost.visible = true;
-          state.ghost.targetOpacity = 0.4 + Math.random() * 0.3;
+          state.ghost.targetOpacity = 0.6;
         }
       } else {
-        // Fade in
         if (state.ghost.opacity < state.ghost.targetOpacity) {
           state.ghost.opacity += GHOST_FADE_SPEED;
         }
 
-        // Despawn if player gets too close
-        const distToPlayer = Math.hypot(state.player.x - state.ghost.x, state.player.y - state.ghost.y);
-        if (distToPlayer < VISIBILITY_RADIUS * 0.8) {
-           state.ghost.visible = false;
-           state.ghost.opacity = 0; // Immediate vanish or fast fade out
-        }
+        // Chasing logic with basic prediction
+        const predictLookahead = 20;
+        const targetX = state.player.x + (state.player.isMoving ? dx * predictLookahead : 0);
+        const targetY = state.player.y + (state.player.isMoving ? dy * predictLookahead : 0);
+
+        const angleToTarget = Math.atan2(targetY - state.ghost.y, targetX - state.ghost.x);
+        const chaseSpeed = 1.2;
         
-        // Random drift
-        state.ghost.x += (Math.random() - 0.5) * 0.5;
-        state.ghost.y += (Math.random() - 0.5) * 0.5;
+        state.ghost.x += Math.cos(angleToTarget) * chaseSpeed;
+        state.ghost.y += Math.sin(angleToTarget) * chaseSpeed;
+
+        const distToPlayer = Math.hypot(state.player.x - state.ghost.x, state.player.y - state.ghost.y);
+        
+        // If caught, reset level
+        if (distToPlayer < PLAYER_RADIUS * 1.5) {
+          initLevel(state.currentLevel);
+        }
+
+        // Despawn if too far
+        if (distToPlayer > GHOST_MAX_DIST * 1.5) {
+          state.ghost.visible = false;
+          state.ghost.opacity = 0;
+        }
       }
 
       // 4. Check End Condition (Enter Door)
       const currentTileX = Math.floor(state.player.x / TILE_SIZE);
       const currentTileY = Math.floor(state.player.y / TILE_SIZE);
-      if (LEVEL_MAP[currentTileY]?.[currentTileX] === 2 && state.isDoorOpen) {
-        state.gameCompleted = true;
-        const duration = (Date.now() - state.startTime) / 1000;
-        onGameComplete(Math.round(duration), true);
+      if (currentMap[currentTileY]?.[currentTileX] === 2 && state.isDoorOpen) {
+        if (state.currentLevel < LEVEL_MAPS.length - 1) {
+          state.currentLevel++;
+          setLevel(state.currentLevel);
+          initLevel(state.currentLevel);
+        } else {
+          state.gameCompleted = true;
+          const duration = (Date.now() - state.startTime) / 1000;
+          onGameComplete(Math.round(duration), true);
+        }
       }
 
       draw();
@@ -190,18 +249,16 @@ export function GameCanvas({ onGameComplete, onTensionChange }: GameCanvasProps)
 
     const draw = () => {
       const state = stateRef.current;
+      const currentMap = LEVEL_MAPS[state.currentLevel];
       
       // Clear
       ctx.fillStyle = COLOR_BG;
       ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-      // Save context for camera/translation if we wanted it, but map fits screen (800x600)
-      // Map is 20 * 40 = 800 width, 15 * 40 = 600 height. Perfect fit.
-
       // Draw Map
-      for(let y=0; y<LEVEL_MAP.length; y++) {
-        for(let x=0; x<LEVEL_MAP[y].length; x++) {
-          const tile = LEVEL_MAP[y][x];
+      for(let y=0; y<currentMap.length; y++) {
+        for(let x=0; x<currentMap[y].length; x++) {
+          const tile = currentMap[y][x];
           const px = x * TILE_SIZE;
           const py = y * TILE_SIZE;
 
@@ -209,22 +266,18 @@ export function GameCanvas({ onGameComplete, onTensionChange }: GameCanvasProps)
             ctx.fillStyle = COLOR_WALL;
             ctx.fillRect(px, py, TILE_SIZE, TILE_SIZE);
           } else if (tile === 2) {
-            // Door
             ctx.fillStyle = state.isDoorOpen ? COLOR_DOOR_OPEN : COLOR_DOOR_LOCKED;
             ctx.fillRect(px, py, TILE_SIZE, TILE_SIZE);
-            
-            // Visual cue for waiting
             if (!state.isDoorOpen && state.doorOpenProgress > 0) {
               const glowAlpha = state.doorOpenProgress * 0.5;
               ctx.fillStyle = `rgba(255, 255, 255, ${glowAlpha})`;
               ctx.fillRect(px, py, TILE_SIZE, TILE_SIZE);
-              
-              // Particle effect hint (dots rising from door)
-              if (Math.random() < state.doorOpenProgress) {
-                 ctx.fillStyle = "white";
-                 ctx.fillRect(px + Math.random()*TILE_SIZE, py + Math.random()*TILE_SIZE, 2, 2);
-              }
             }
+          } else if (tile === 3) {
+            ctx.fillStyle = "#fbbf24"; // Key color
+            ctx.beginPath();
+            ctx.arc(px + TILE_SIZE/2, py + TILE_SIZE/2, 6, 0, Math.PI * 2);
+            ctx.fill();
           } else {
             ctx.fillStyle = COLOR_FLOOR;
             ctx.fillRect(px, py, TILE_SIZE, TILE_SIZE);
