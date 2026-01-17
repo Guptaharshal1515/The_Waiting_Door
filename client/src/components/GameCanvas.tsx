@@ -59,6 +59,78 @@ const LEVEL_MAPS = [
     [1,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,1],
     [1,0,0,0,0,4,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
     [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+  ],
+  // Level 3: The Crossroads
+  [
+    [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+    [1,9,0,0,0,0,0,1,4,0,0,0,1,0,0,0,0,0,0,1],
+    [1,0,1,1,1,0,0,1,0,0,0,0,1,0,0,1,1,1,0,1],
+    [1,0,1,3,1,0,0,1,0,4,0,0,1,0,0,1,4,1,0,1],
+    [1,0,1,0,1,0,0,1,1,1,1,1,1,0,0,1,0,1,0,1],
+    [1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
+    [1,1,1,0,1,1,1,1,1,2,2,1,1,1,1,1,0,1,1,1],
+    [1,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4,1],
+    [1,1,1,0,1,1,1,1,1,1,1,1,1,1,1,1,0,1,1,1],
+    [1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
+    [1,0,1,0,1,0,0,1,1,1,1,1,1,0,0,1,0,1,0,1],
+    [1,0,1,4,1,0,0,1,0,4,0,0,1,0,0,1,3,1,0,1],
+    [1,0,1,1,1,0,0,1,0,0,0,0,1,0,0,1,1,1,0,1],
+    [1,0,0,0,0,0,0,1,4,0,0,0,1,0,0,0,0,0,0,1],
+    [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+  ],
+  // Level 4: The Spiral
+  [
+    [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+    [1,9,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4,1],
+    [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,1],
+    [1,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,1],
+    [1,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,1,0,1],
+    [1,0,1,3,0,0,0,0,0,0,0,0,0,0,4,1,0,1,0,1],
+    [1,0,1,0,1,1,1,1,1,2,2,1,1,1,0,1,0,1,0,1],
+    [1,0,1,0,1,4,0,0,0,0,0,0,0,1,0,1,0,1,0,1],
+    [1,0,1,0,1,1,1,1,1,1,1,1,1,1,0,1,0,1,0,1],
+    [1,0,1,0,0,0,0,4,0,0,0,0,0,0,0,1,0,1,0,1],
+    [1,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,1,0,1],
+    [1,0,0,0,0,0,0,0,0,0,0,4,0,0,0,0,0,1,0,1],
+    [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,1],
+    [1,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
+    [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+  ],
+  // Level 5: The Chambers
+  [
+    [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+    [1,9,0,0,1,4,0,0,1,0,0,0,1,4,0,0,1,0,0,1],
+    [1,0,0,0,1,0,0,0,1,0,0,0,1,0,0,0,1,0,0,1],
+    [1,1,0,1,1,0,1,1,1,0,0,0,1,1,0,1,1,0,1,1],
+    [1,4,0,0,0,0,0,0,0,0,4,0,0,0,0,0,0,0,4,1],
+    [1,1,0,1,1,0,1,1,1,0,0,0,1,1,0,1,1,0,1,1],
+    [1,0,0,0,1,0,0,0,1,2,2,1,1,0,0,0,1,0,0,1],
+    [1,0,0,0,1,0,3,0,1,0,0,0,1,0,3,0,1,0,0,1],
+    [1,1,0,1,1,1,1,1,1,0,0,0,1,1,1,1,1,0,1,1],
+    [1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
+    [1,1,0,1,1,1,1,1,1,0,0,0,1,1,1,1,1,0,1,1],
+    [1,4,0,0,0,4,0,0,0,0,4,0,0,0,0,4,0,0,4,1],
+    [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+    [1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
+    [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+  ],
+  // Level 6: The Final Observation
+  [
+    [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+    [1,9,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
+    [1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
+    [1,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,1],
+    [1,0,0,1,4,4,4,4,4,4,4,4,4,4,4,4,1,0,0,1],
+    [1,0,0,1,4,0,0,0,0,0,0,0,0,0,0,4,1,0,0,1],
+    [1,0,0,1,4,0,1,1,1,2,2,1,1,1,0,4,1,0,0,1],
+    [1,0,0,1,4,0,1,3,0,0,0,0,0,1,0,4,1,0,0,1],
+    [1,0,0,1,4,0,1,1,1,1,1,1,1,1,0,4,1,0,0,1],
+    [1,0,0,1,4,0,0,0,0,0,0,0,0,0,0,4,1,0,0,1],
+    [1,0,0,1,4,4,4,4,4,4,4,4,4,4,4,4,1,0,0,1],
+    [1,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,1],
+    [1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
+    [1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
+    [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
   ]
 ];
 
@@ -69,7 +141,7 @@ export function GameCanvas({ onGameComplete, onTensionChange }: GameCanvasProps)
   const [level, setLevel] = useState(0);
   
   // Game state stored in Ref to avoid re-renders during loop
-  const stateRef = useRef<GameState & { currentLevel: number; hasKey: boolean; ghostVelocity: Point }>({
+  const stateRef = useRef<GameState & { currentLevel: number; hasKey: boolean; ghostVelocity: Point; totalRelics: number; collectedRelics: number }>({
     player: { x: 80, y: 80, isMoving: false },
     ghost: { x: 0, y: 0, opacity: 0, targetOpacity: 0, visible: false },
     lastMoveTime: Date.now(),
@@ -79,7 +151,9 @@ export function GameCanvas({ onGameComplete, onTensionChange }: GameCanvasProps)
     startTime: Date.now(),
     currentLevel: 0,
     hasKey: false,
-    ghostVelocity: { x: 0, y: 0 }
+    ghostVelocity: { x: 0, y: 0 },
+    totalRelics: 0,
+    collectedRelics: 0
   });
 
   // Input state
@@ -87,14 +161,18 @@ export function GameCanvas({ onGameComplete, onTensionChange }: GameCanvasProps)
 
   const initLevel = (lvlIndex: number) => {
     const map = LEVEL_MAPS[lvlIndex];
+    let relicCount = 0;
     for(let y=0; y<map.length; y++) {
       for(let x=0; x<map[y].length; x++) {
         if (map[y][x] === 9) {
           stateRef.current.player.x = x * TILE_SIZE + TILE_SIZE/2;
           stateRef.current.player.y = y * TILE_SIZE + TILE_SIZE/2;
         }
+        if (map[y][x] === 4) relicCount++;
       }
     }
+    stateRef.current.totalRelics = relicCount;
+    stateRef.current.collectedRelics = 0;
     stateRef.current.isDoorOpen = false;
     stateRef.current.doorOpenProgress = 0;
     stateRef.current.hasKey = false;
@@ -172,11 +250,12 @@ export function GameCanvas({ onGameComplete, onTensionChange }: GameCanvasProps)
       }
       if (currentMap[py]?.[px] === 4) {
         currentMap[py][px] = 0; // Remove relic
-        // Relic collected
+        state.collectedRelics++;
       }
 
       // 2. Waiting Logic (The Puzzle)
-      if (state.player.isMoving || !state.hasKey) {
+      const allRelicsCollected = state.collectedRelics >= state.totalRelics;
+      if (state.player.isMoving || !state.hasKey || !allRelicsCollected) {
         state.lastMoveTime = now;
         state.doorOpenProgress = 0;
         // Notify parent tension reset
@@ -198,13 +277,13 @@ export function GameCanvas({ onGameComplete, onTensionChange }: GameCanvasProps)
       const inSafetyZone = currentMap[currentTileY]?.[currentTileX] === 2 && state.isDoorOpen;
 
       if (!state.ghost.visible) {
-        if (!inSafetyZone && Math.random() < GHOST_SPAWN_CHANCE) {
+        if (!inSafetyZone && Math.random() < GHOST_SPAWN_CHANCE * (1 + state.currentLevel * 0.5)) {
           const angle = Math.random() * Math.PI * 2;
           const dist = GHOST_MAX_DIST;
           state.ghost.x = state.player.x + Math.cos(angle) * dist;
           state.ghost.y = state.player.y + Math.sin(angle) * dist;
           state.ghost.visible = true;
-          state.ghost.targetOpacity = 0.6;
+          state.ghost.targetOpacity = 0.6 + (state.currentLevel * 0.05);
         }
       } else {
         if (state.ghost.opacity < state.ghost.targetOpacity) {
@@ -213,18 +292,18 @@ export function GameCanvas({ onGameComplete, onTensionChange }: GameCanvasProps)
 
         if (inSafetyZone) {
           // Fade out and despawn if player enters the door
-          state.ghost.opacity -= GHOST_FADE_SPEED * 2;
+          state.ghost.opacity -= GHOST_FADE_SPEED * 3;
           if (state.ghost.opacity <= 0) {
             state.ghost.visible = false;
           }
         } else {
           // Chasing logic with basic prediction
-          const predictLookahead = 20;
+          const predictLookahead = 20 + (state.currentLevel * 5);
           const targetX = state.player.x + (state.player.isMoving ? dx * predictLookahead : 0);
           const targetY = state.player.y + (state.player.isMoving ? dy * predictLookahead : 0);
 
           const angleToTarget = Math.atan2(targetY - state.ghost.y, targetX - state.ghost.x);
-          const chaseSpeed = 1.2;
+          const chaseSpeed = 1.2 + (state.currentLevel * 0.15);
           
           state.ghost.x += Math.cos(angleToTarget) * chaseSpeed;
           state.ghost.y += Math.sin(angleToTarget) * chaseSpeed;
@@ -237,7 +316,7 @@ export function GameCanvas({ onGameComplete, onTensionChange }: GameCanvasProps)
           }
 
           // Despawn if too far
-          if (distToPlayer > GHOST_MAX_DIST * 1.5) {
+          if (distToPlayer > GHOST_MAX_DIST * 2) {
             state.ghost.visible = false;
             state.ghost.opacity = 0;
           }
