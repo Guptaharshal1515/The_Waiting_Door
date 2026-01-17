@@ -24,40 +24,40 @@ interface GameCanvasProps {
   onTensionChange: (tension: number) => void;
 }
 
-// Simple level map (1 = wall, 0 = floor, 2 = door, 3 = key, 9 = start)
+// Simple level map (1 = wall, 0 = floor, 2 = door, 3 = key, 4 = relic, 9 = start)
 const LEVEL_MAPS = [
   [
     [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
     [1,9,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,1],
-    [1,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,1],
+    [1,0,0,0,0,0,1,0,0,4,0,0,0,0,0,0,0,0,0,1],
     [1,0,0,0,0,0,1,0,0,1,1,1,1,0,0,0,0,0,0,1],
     [1,0,0,1,0,0,1,0,0,1,3,0,0,0,0,0,1,0,0,1],
-    [1,0,0,1,0,0,0,0,0,1,0,0,0,0,0,1,0,0,1,1],
+    [1,0,0,1,0,0,0,0,0,1,0,0,0,0,0,1,0,4,1,1],
     [1,0,0,1,1,1,1,0,0,0,0,0,1,1,1,1,0,0,0,1],
     [1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
-    [1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
+    [1,0,0,0,0,4,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
     [1,0,0,1,1,1,1,1,1,0,0,1,1,1,1,1,1,0,0,1],
     [1,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,1],
-    [1,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,1],
+    [1,0,0,1,0,4,0,0,0,0,0,0,0,0,0,0,1,0,0,1],
     [1,0,0,1,0,0,1,1,1,2,2,1,1,1,0,0,1,0,0,1],
     [1,0,0,0,0,0,1,0,0,0,0,0,0,1,0,0,0,0,0,1],
     [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
   ],
   [
     [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
-    [1,9,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
+    [1,9,0,0,0,0,0,0,4,0,0,0,0,0,0,0,0,0,0,1],
     [1,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,1],
-    [1,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,1],
+    [1,0,1,0,0,0,4,0,0,0,0,0,0,0,0,0,0,1,0,1],
     [1,0,1,0,1,1,1,1,1,1,1,1,1,1,1,1,0,1,0,1],
     [1,0,1,0,1,0,0,0,0,0,0,0,0,0,0,1,0,1,0,1],
     [1,0,1,0,1,0,1,1,1,2,2,1,1,1,0,1,0,1,0,1],
     [1,0,1,0,1,0,1,3,0,0,0,0,0,1,0,1,0,1,0,1],
-    [1,0,1,0,1,0,1,1,1,1,1,1,1,1,0,1,0,1,0,1],
-    [1,0,1,0,1,0,0,0,0,0,0,0,0,0,0,1,0,1,0,1],
+    [1,0,1,0,1,0,1,1,1,1,1,1,1,1,0,1,4,1,0,1],
+    [1,0,1,0,1,0,0,0,0,4,0,0,0,0,0,1,0,1,0,1],
     [1,0,1,0,1,1,1,1,1,1,1,1,1,1,1,1,0,1,0,1],
     [1,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,1],
     [1,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,1],
-    [1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
+    [1,0,0,0,0,4,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
     [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
   ]
 ];
@@ -163,12 +163,16 @@ export function GameCanvas({ onGameComplete, onTensionChange }: GameCanvasProps)
 
       state.player.isMoving = (dx !== 0 || dy !== 0);
 
-      // Key collection
+      // Collection logic
       const px = Math.floor(state.player.x / TILE_SIZE);
       const py = Math.floor(state.player.y / TILE_SIZE);
       if (currentMap[py]?.[px] === 3) {
         currentMap[py][px] = 0; // Remove key
         state.hasKey = true;
+      }
+      if (currentMap[py]?.[px] === 4) {
+        currentMap[py][px] = 0; // Remove relic
+        // Relic collected
       }
 
       // 2. Waiting Logic (The Puzzle)
@@ -189,8 +193,12 @@ export function GameCanvas({ onGameComplete, onTensionChange }: GameCanvasProps)
       }
 
       // 3. Ghost Logic (AI Chasing & Prediction)
+      const currentTileX = Math.floor(state.player.x / TILE_SIZE);
+      const currentTileY = Math.floor(state.player.y / TILE_SIZE);
+      const inSafetyZone = currentMap[currentTileY]?.[currentTileX] === 2 && state.isDoorOpen;
+
       if (!state.ghost.visible) {
-        if (Math.random() < GHOST_SPAWN_CHANCE) {
+        if (!inSafetyZone && Math.random() < GHOST_SPAWN_CHANCE) {
           const angle = Math.random() * Math.PI * 2;
           const dist = GHOST_MAX_DIST;
           state.ghost.x = state.player.x + Math.cos(angle) * dist;
@@ -203,35 +211,41 @@ export function GameCanvas({ onGameComplete, onTensionChange }: GameCanvasProps)
           state.ghost.opacity += GHOST_FADE_SPEED;
         }
 
-        // Chasing logic with basic prediction
-        const predictLookahead = 20;
-        const targetX = state.player.x + (state.player.isMoving ? dx * predictLookahead : 0);
-        const targetY = state.player.y + (state.player.isMoving ? dy * predictLookahead : 0);
+        if (inSafetyZone) {
+          // Fade out and despawn if player enters the door
+          state.ghost.opacity -= GHOST_FADE_SPEED * 2;
+          if (state.ghost.opacity <= 0) {
+            state.ghost.visible = false;
+          }
+        } else {
+          // Chasing logic with basic prediction
+          const predictLookahead = 20;
+          const targetX = state.player.x + (state.player.isMoving ? dx * predictLookahead : 0);
+          const targetY = state.player.y + (state.player.isMoving ? dy * predictLookahead : 0);
 
-        const angleToTarget = Math.atan2(targetY - state.ghost.y, targetX - state.ghost.x);
-        const chaseSpeed = 1.2;
-        
-        state.ghost.x += Math.cos(angleToTarget) * chaseSpeed;
-        state.ghost.y += Math.sin(angleToTarget) * chaseSpeed;
+          const angleToTarget = Math.atan2(targetY - state.ghost.y, targetX - state.ghost.x);
+          const chaseSpeed = 1.2;
+          
+          state.ghost.x += Math.cos(angleToTarget) * chaseSpeed;
+          state.ghost.y += Math.sin(angleToTarget) * chaseSpeed;
 
-        const distToPlayer = Math.hypot(state.player.x - state.ghost.x, state.player.y - state.ghost.y);
-        
-        // If caught, reset level
-        if (distToPlayer < PLAYER_RADIUS * 1.5) {
-          initLevel(state.currentLevel);
-        }
+          const distToPlayer = Math.hypot(state.player.x - state.ghost.x, state.player.y - state.ghost.y);
+          
+          // If caught, reset level
+          if (distToPlayer < PLAYER_RADIUS * 1.5) {
+            initLevel(state.currentLevel);
+          }
 
-        // Despawn if too far
-        if (distToPlayer > GHOST_MAX_DIST * 1.5) {
-          state.ghost.visible = false;
-          state.ghost.opacity = 0;
+          // Despawn if too far
+          if (distToPlayer > GHOST_MAX_DIST * 1.5) {
+            state.ghost.visible = false;
+            state.ghost.opacity = 0;
+          }
         }
       }
 
       // 4. Check End Condition (Enter Door)
-      const currentTileX = Math.floor(state.player.x / TILE_SIZE);
-      const currentTileY = Math.floor(state.player.y / TILE_SIZE);
-      if (currentMap[currentTileY]?.[currentTileX] === 2 && state.isDoorOpen) {
+      if (inSafetyZone) {
         if (state.currentLevel < LEVEL_MAPS.length - 1) {
           state.currentLevel++;
           setLevel(state.currentLevel);
@@ -277,6 +291,14 @@ export function GameCanvas({ onGameComplete, onTensionChange }: GameCanvasProps)
             ctx.fillStyle = "#fbbf24"; // Key color
             ctx.beginPath();
             ctx.arc(px + TILE_SIZE/2, py + TILE_SIZE/2, 6, 0, Math.PI * 2);
+            ctx.fill();
+          } else if (tile === 4) {
+            ctx.fillStyle = "#8b5cf6"; // Relic color
+            ctx.beginPath();
+            ctx.moveTo(px + TILE_SIZE/2, py + 10);
+            ctx.lineTo(px + 10, py + TILE_SIZE - 10);
+            ctx.lineTo(px + TILE_SIZE - 10, py + TILE_SIZE - 10);
+            ctx.closePath();
             ctx.fill();
           } else {
             ctx.fillStyle = COLOR_FLOOR;
